@@ -20,14 +20,8 @@ const data = {
       id: 'column-1',
       title: 'team',
       // orders tasks
-      teamIds: ['gbp','clr','lad','phe','sea','lal','p76','mon'],
-    },
-    'column-2': {
-      id: 'column-2',
-      title: 'league',
-      // orders tasks
-      itemIds: ['nfl','mlb','nhl','nba'],
-    },
+      teamIds: ['lad','gbp','mon','p76','sea','lal','phe','clr'],
+    }
   },
   // orders columns
   columnOrder: ['column-1'],

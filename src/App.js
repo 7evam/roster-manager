@@ -1,16 +1,24 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom'
-import data from './data'
-import Column from './Column'
+import TeamList from './TeamList'
+import LeagueList from './LeagueList'
+import styled from 'styled-components';
+
+const Container = styled.div`
+display: flex;
+justify-content: center;
+`;
+
+
 
 class App extends React.Component {
-  state = data
   render(){
-    return this.state.columnOrder.map(columnId => {
-      const column = this.state.columns[columnId];
-      const teams = column.teamIds.map(teamId => this.state.teams[teamId]);
-      return <Column key={column.id} column={column} teams={teams} />
-    })
+    return(
+    <Container>
+    <LeagueList />
+    <TeamList />
+    </Container>
+  )
   }
 }
 

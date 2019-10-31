@@ -1,26 +1,17 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {Component} from 'react';
+import ReactDOM from 'react-dom'
+import data from './data'
+import Column from './Column'
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+class App extends React.Component {
+  state = data
+  render(){
+    return this.state.columnOrder.map(columnId => {
+      const column = this.state.columns[columnId];
+      const teams = column.teamIds.map(teamId => this.state.teams[teamId]);
+      return <Column key={column.id} column={column} teams={teams} />
+    })
+  }
 }
 
 export default App;

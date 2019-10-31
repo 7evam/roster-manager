@@ -9,8 +9,6 @@ display: flex;
 justify-content: center;
 `;
 
-
-
 class App extends React.Component {
   render(){
     return(

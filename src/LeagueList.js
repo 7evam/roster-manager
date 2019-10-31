@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import ReactDOM from 'react-dom'
 import data from './data'
 import Column from './Column'
-import { DragDropContext } from 'react-beautiful-dnd'
 import styled from 'styled-components';
 import Position from './Position'
 

@@ -10,11 +10,12 @@ justify-content: center;
 `;
 
 class App extends React.Component {
+
   render(){
     return(
     <Container>
     <LeagueList />
-    <TeamList />
+    <TeamList/>
     </Container>
   )
   }

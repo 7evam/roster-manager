@@ -18,7 +18,10 @@ export default class Column extends React.Component {
       <Container>
           <TeamList>
             {this.props.teams.map((team,index) => (
-            <Team key={team.id} index={index} team={team}/>
+            <Team
+            handleClick={this.props.handleClick}
+            key={team.id} index={index} team={team}
+            />
           ))}
           </TeamList>
       </Container>

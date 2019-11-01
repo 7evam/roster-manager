@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import data from './data'
 import Column from './Column'
 import Team from './Team'
+import Slot from './Slot'
 import { DragDropContext } from 'react-beautiful-dnd'
 import styled from 'styled-components';
 
@@ -12,7 +13,7 @@ const Container = styled.div`
   width:60%;
 `;
 
-class TeamList extends React.Component {
+class Roster extends React.Component {
   constructor(props){
   super(props);
   this.state = data
@@ -44,34 +45,37 @@ class TeamList extends React.Component {
   }
 
   render(){
+    let nfl = this.state.teams.find(team => {return team.slot === 'NFL'})
+    let mlb = this.state.teams.find(team => {return team.slot === 'MLB'})
+    let nhl = this.state.teams.find(team => {return team.slot === 'NHL'})
+    let nba = this.state.teams.find(team => {return team.slot === 'NBA'})
+    let flex = this.state.teams.find(team => {return team.slot === 'FLEX'})
+    let bench = []
+    this.state.teams.forEach(team => {
+      if(!team.slot){
+        bench.push(team)
+      }
+    })
+
     return(
-      <Container>
-      {this.state.teams.map((team,index) => (
-        <Team
-            handleClick={this.handleClick}
-            team={team}
-        />
-      ))}
+    <Container>
+        <Slot slot = 'MLB' team={mlb}/>
+        <Slot slot = 'NFL' team={nfl}/>
+        <Slot slot = 'NHL' team={nhl}/>
+        <Slot slot = 'NBA' team={nba}/>
+        <Slot slot = 'FLEX' team={flex}/>
+        {bench.map((team,index) => (
+          <Slot slot = 'BENCH' team={team} />
+        ))}
     </Container>
   )
   }
 }
-export default TeamList;
+export default Roster;
 
-// return(
-//   this.state.columnOrder.map(columnId => {
-//   const column = this.state.columns[columnId];
-//   const teams = column.teamIds.map(teamId => this.state.teams[teamId]);
-//   return <Column
-//   handleClick={this.handleClick} key={column.id}
-//   column={column} teams={teams}
+// {this.state.teams.map((team,index) => (
+//   <Team
+//       handleClick={this.handleClick}
+//       team={team}
 //   />
-// })
-// )
-
-// return(
-//   this.state.teams.map(team =>{
-//     <Team
-
-//     />
-//   })
+// ))}

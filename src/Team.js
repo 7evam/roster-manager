@@ -8,7 +8,7 @@ const Container = styled.div`
   background-color: ${props => !!props.team.selected ? "green" : "white"}
 `
 
-function Team({ team, selectedTeam, handleClick }){
+function Team({ team, handleClick }){
     return (
         <Container team={team}>
         {team.name}

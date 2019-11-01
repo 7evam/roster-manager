@@ -3,6 +3,8 @@ import ReactDOM from 'react-dom'
 import TeamList from './TeamList'
 import LeagueList from './LeagueList'
 import styled from 'styled-components';
+import Roster from './Roster'
+
 
 const Container = styled.div`
 display: flex;
@@ -14,8 +16,7 @@ class App extends React.Component {
   render(){
     return(
     <Container>
-    <LeagueList />
-    <TeamList/>
+      <Roster/>
     </Container>
   )
   }

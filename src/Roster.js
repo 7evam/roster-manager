@@ -22,9 +22,6 @@ class Roster extends React.Component {
 
   componentDidMount(){
     let newState = this.state
-    // Object.keys(newState.teams).forEach(
-    //   team => {newState.teams[team].selected = false}
-    // )
     newState.teams.forEach(
       team => team.selected = false
     )
@@ -34,9 +31,24 @@ class Roster extends React.Component {
 
   handleClick(clickedTeam){
     let newState = this.state
-    newState.teams.find(team => {return team.id === clickedTeam.id}).selected ?
-    newState.teams.find(team => {return team.id === clickedTeam.id}).selected = false :
-    newState.teams.find(team => {return team.id === clickedTeam.id}).selected = true
+    if(newState.selectedTeam===null){
+      newState.selectedTeam = clickedTeam
+      newState.teams.find(team => {return team.id === clickedTeam.id}).selected = true
+    } else {
+      newState.teams.find(team => {return team.id === newState.selectedTeam.id}).selected = false
+      let temp = clickedTeam.slot
+      clickedTeam.slot = newState.selectedTeam.slot
+      newState.selectedTeam.slot = temp
+      let swap1, swap2
+      newState.teams.forEach((team,index) => {
+        if(team.id === clickedTeam.id) swap1 = index
+        if(team.id === newState.selectedTeam.id) swap2 = index
+      })
+      newState.teams.splice(swap1,1,newState.selectedTeam)
+      newState.teams.splice(swap2,1,clickedTeam)
+      newState.selectedTeam = null
+    }
+
 
     this.setState({
       teams: newState.teams
@@ -59,13 +71,13 @@ class Roster extends React.Component {
 
     return(
     <Container>
-        <Slot slot = 'MLB' team={mlb}/>
-        <Slot slot = 'NFL' team={nfl}/>
-        <Slot slot = 'NHL' team={nhl}/>
-        <Slot slot = 'NBA' team={nba}/>
-        <Slot slot = 'FLEX' team={flex}/>
+        <Slot slot = 'MLB' team={mlb} handleClick={this.handleClick}/>
+        <Slot slot = 'NFL' team={nfl} handleClick={this.handleClick}/>
+        <Slot slot = 'NHL' team={nhl} handleClick={this.handleClick}/>
+        <Slot slot = 'NBA' team={nba} handleClick={this.handleClick}/>
+        <Slot slot = 'FLEX' team={flex} handleClick={this.handleClick}/>
         {bench.map((team,index) => (
-          <Slot slot = 'BENCH' team={team} />
+          <Slot slot = 'BENCH' team={team} handleClick={this.handleClick} />
         ))}
     </Container>
   )

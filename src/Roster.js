@@ -32,24 +32,42 @@ class Roster extends React.Component {
   handleClick(clickedTeam){
     let newState = this.state
     if(newState.selectedTeam===null){
+      console.log('selected team null')
       newState.selectedTeam = clickedTeam
       newState.teams.find(team => {return team.id === clickedTeam.id}).selected = true
     } else {
+      // check if swap is valid
+      const checkIfValid = () => {
+        let team1 = clickedTeam
+        let team2 = newState.selectedTeam
+        let team1valid = false
+        let team2valid = false
+        if(team1.league === team2.slot ||
+          team2.slot === 'FLEX' ||
+          team2.slot === null
+        ){team1valid = true}
+        if(team2.league === team1.slot ||
+        team1.slot === 'FLEX' ||
+        team1.slot === null){team2valid = true}
+        return team1valid && team2valid
+      }
+      if(checkIfValid()){
+        //newState.teams.find(team => {return team.id === newState.selectedTeam.id}).selected = false
+        let temp = clickedTeam.slot
+        clickedTeam.slot = newState.selectedTeam.slot
+        newState.selectedTeam.slot = temp
+        let swap1, swap2
+        newState.teams.forEach((team,index) => {
+          if(team.id === clickedTeam.id) swap1 = index
+          if(team.id === newState.selectedTeam.id) swap2 = index
+        })
+        newState.teams.splice(swap1,1,newState.selectedTeam)
+        newState.teams.splice(swap2,1,clickedTeam)
+      } else {
+      }
       newState.teams.find(team => {return team.id === newState.selectedTeam.id}).selected = false
-      let temp = clickedTeam.slot
-      clickedTeam.slot = newState.selectedTeam.slot
-      newState.selectedTeam.slot = temp
-      let swap1, swap2
-      newState.teams.forEach((team,index) => {
-        if(team.id === clickedTeam.id) swap1 = index
-        if(team.id === newState.selectedTeam.id) swap2 = index
-      })
-      newState.teams.splice(swap1,1,newState.selectedTeam)
-      newState.teams.splice(swap2,1,clickedTeam)
       newState.selectedTeam = null
     }
-
-
     this.setState({
       teams: newState.teams
     })
@@ -71,6 +89,7 @@ class Roster extends React.Component {
 
     return(
     <Container>
+        <h1>Evan's roster</h1>
         <Slot slot = 'MLB' team={mlb} handleClick={this.handleClick}/>
         <Slot slot = 'NFL' team={nfl} handleClick={this.handleClick}/>
         <Slot slot = 'NHL' team={nhl} handleClick={this.handleClick}/>

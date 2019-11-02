@@ -5,7 +5,7 @@ const Container = styled.div`
   border: 1px solid lightgrey;
   margin-bottom: 8px;
   padding: 8px;
-  background-color: ${props => !!props.team.selected ? "green" : "white"};
+  background-color: ${props => !!props.team.selected ? "#C8F39C" : "white"};
 `
 
 function Slot({ team, slot, handleClick }){

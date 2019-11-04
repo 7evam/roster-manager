@@ -4,6 +4,7 @@ import data from './data'
 import Column from './Column'
 import Team from './Team'
 import Slot from './Slot'
+import FlashMessage from './FlashMessage'
 import { DragDropContext } from 'react-beautiful-dnd'
 import styled from 'styled-components';
 
@@ -18,6 +19,7 @@ class Roster extends React.Component {
   super(props);
   this.state = data
   this.handleClick = this.handleClick.bind(this)
+  this.handleError = this.handleError.bind(this)
   }
 
   componentDidMount(){
@@ -26,7 +28,21 @@ class Roster extends React.Component {
       team => team.selected = false
     )
     newState.selectedTeam = null
+    newState.error = null
     this.setState(newState)
+  }
+
+  handleError(err){
+    console.log('in the handleError')
+    this.setState({
+      error: err
+    })
+    setTimeout(() => {
+      console.log('in the set timeout')
+      this.setState({
+        error: null
+      })
+    }, 3000);
   }
 
   handleClick(clickedTeam){
@@ -64,6 +80,7 @@ class Roster extends React.Component {
         newState.teams.splice(swap1,1,newState.selectedTeam)
         newState.teams.splice(swap2,1,clickedTeam)
       } else {
+        this.handleError('that roster move is not acceptable')
       }
       newState.teams.find(team => {return team.id === newState.selectedTeam.id}).selected = false
       newState.selectedTeam = null
@@ -98,6 +115,7 @@ class Roster extends React.Component {
         {bench.map((team,index) => (
           <Slot slot = 'BENCH' team={team} handleClick={this.handleClick} />
         ))}
+        <FlashMessage error={this.state.error}/>
     </Container>
   )
   }

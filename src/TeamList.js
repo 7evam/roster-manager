@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom'
 import data from './data'
 import Column from './Column'
 import Team from './Team'
+import FlashMessage from './FlashMessage'
 import { DragDropContext } from 'react-beautiful-dnd'
 import styled from 'styled-components';
 
@@ -28,6 +29,7 @@ class TeamList extends React.Component {
       team => team.selected = false
     )
     newState.selectedTeam = null
+    newState.error = null
     this.setState(newState)
   }
 
@@ -46,6 +48,7 @@ class TeamList extends React.Component {
   render(){
     return(
       <Container>
+      <FlashMessage error={this.state.error}/>
       {this.state.teams.map((team,index) => (
         <Team
             handleClick={this.handleClick}

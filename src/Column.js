@@ -1,7 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
 import Team from './Team'
-import { Droppable } from 'react-beautiful-dnd'
 
 const Container = styled.div`
   margin: 8px;

@@ -5,7 +5,6 @@ import Column from './Column'
 import Team from './Team'
 import Slot from './Slot'
 import FlashMessage from './FlashMessage'
-import { DragDropContext } from 'react-beautiful-dnd'
 import styled from 'styled-components';
 
 const Container = styled.div`

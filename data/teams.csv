@@ -1,0 +1,124 @@
+name,active,slot,user_id,league_id
+Atlanta Braves,false,null,1,1
+Miami Marlins,false,null,1,1
+New York Mets,false,null,1,1
+Philadelphia Phillies,false,null,1,1
+Washington Nationals,false,null,1,1
+Chicago Cubs,false,null,1,1
+Cincinnati Reds,false,null,1,1
+Milwaukee Brewers,false,null,1,1
+Pittsburgh Pirates,false,null,1,1
+St. Louis Cardinals,false,null,1,1
+Arizona Diamondbacks,false,null,1,1
+Colorado Rockies,false,null,1,1
+Los Angeles Dodgers,false,null,1,1
+San Diego Padres,false,null,1,1
+San Francisco Giants,false,null,1,1
+Baltimore Orioles,false,null,1,1
+Boston Red Sox,false,null,1,1
+New York Yankees,false,null,1,1
+Tampa Bay Rays,false,null,1,1
+Toronto Blue Jays,false,null,1,1
+Chicago White Sox,false,null,1,1
+Cleveland Indians,false,null,1,1
+Detroit Tigers,false,null,1,1
+Kansas City Royals,false,null,1,1
+Minnesota Twins,false,null,1,1
+Houston Astros,false,null,1,1
+Los Angeles Angels,false,null,1,1
+Oakland Athletics,false,null,1,1
+Seattle Mariners,false,null,1,1
+Texas Rangers,false,null,1,1
+Arizona Cardinals,true,null,1,2
+Atlanta Falcons,true,null,1,2
+Baltimore Ravens,true,null,1,2
+Buffalo Bills,true,null,1,2
+Carolina Panthers,true,null,1,2
+Chicago Bears,true,null,1,2
+Cincinnati Bengals,true,null,1,2
+Cleveland Browns,true,null,1,2
+Dallas Cowboys,true,null,1,2
+Denver Broncos,true,null,1,2
+Detroit Lions,true,null,1,2
+Green Bay Packers,true,null,1,2
+Houston Texans,true,null,1,2
+Indianapolis Colts,true,null,1,2
+Jacksonville Jaguars,true,null,1,2
+Kansas City Chiefs,true,null,1,2
+Los Angeles Chargers,true,null,1,2
+Los Angeles Rams,true,null,1,2
+Miami Dolphins,true,null,1,2
+Minnesota Vikings,true,null,1,2
+New England Patriots,true,null,1,2
+New Orleans Saints,true,null,1,2
+New York Giants,true,null,1,2
+New York Jets,true,null,1,2
+Oakland Raiders,true,null,1,2
+Philadelphia Eagles,true,null,1,2
+Pittsburgh Steelers,true,null,1,2
+San Francisco 49ers,true,null,1,2
+Seattle Seahawks,true,null,1,2
+Tampa Bay Buccaneers,true,null,1,2
+Tennessee Titans,true,null,1,2
+Washington Redskins,true,null,1,2
+Anaheim Ducks,true,null,1,3
+Arizona Coyotes,true,null,1,3
+Boston Bruins,true,null,1,3
+Buffalo Sabres,true,null,1,3
+Calgary Flames,true,null,1,3
+Carolina Hurricanes,true,null,1,3
+Chicago Blackhawks,true,null,1,3
+Colorado Avalanche,true,null,1,3
+Columbus Blue Jackets,true,null,1,3
+Dallas Stars,true,null,1,3
+Detroit Red Wings,true,null,1,3
+Edmonton Oilers,true,null,1,3
+Florida Panthers,true,null,1,3
+Los Angeles Kings,true,null,1,3
+Minnesota Wild,true,null,1,3
+Montreal Canadiens,true,null,1,3
+Nashville Predators,true,null,1,3
+New Jersey Devils,true,null,1,3
+New York Islanders,true,null,1,3
+New York Rangers,true,null,1,3
+Ottawa Senators,true,null,1,3
+Philadelphia Flyers,true,null,1,3
+Pittsburgh Penguins,true,null,1,3
+San Jose Sharks,true,null,1,3
+St Louis Blues,true,null,1,3
+Tampa Bay Lightning,true,null,1,3
+Toronto Maple Leafs,true,null,1,3
+Vancouver Canucks,true,null,1,3
+Vegas Golden Knights,true,null,1,3
+Washington Capitals,true,null,1,3
+Winnipeg Jets,true,null,1,3
+Atlanta Hawks,true,null,1,4
+Boston Celtics,true,null,1,4
+Brooklyn Nets,true,null,1,4
+Charlotte Hornets,true,null,1,4
+Chicago Bulls ,true,null,1,4
+Cleveland Cavaliers,true,null,1,4
+Dallas Mavericks,true,null,1,4
+Denver Nuggets,true,null,1,4
+Detroit Pistons,true,null,1,4
+Golden State Warriors,true,null,1,4
+Houston Rockets,true,null,1,4
+Indiana Pacers,true,null,1,4
+LA Clippers,true,null,1,4
+LA Lakers,true,null,1,4
+Memphis Grizzlies,true,null,1,4
+Miami Heat,true,null,1,4
+Milwaukee Bucks,true,null,1,4
+Minnesota Timberwolves,true,null,1,4
+New Orleans Hornets,true,null,1,4
+New York Knicks,true,null,1,4
+Oklahoma City Thunder,true,null,1,4
+Orlando Magic,true,null,1,4
+Philadelphia Sixers,true,null,1,4
+Phoenix Suns,true,null,1,4
+Portland Trail Blazers,true,null,1,4
+Sacramento Kings,true,null,1,4
+San Antonio Spurs,true,null,1,4
+Toronto Raptors,true,null,1,4
+Utah Jazz,true,null,1,4
+Washington Wizards,true,null,1,4

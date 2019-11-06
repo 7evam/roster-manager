@@ -4756,6 +4756,11 @@ expect@^24.9.0:
     jest-message-util "^24.9.0"
     jest-regex-util "^24.9.0"
 
+express-async-handler@^1.1.4:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/express-async-handler/-/express-async-handler-1.1.4.tgz#225a84908df63b35ae9df94b6f0f1af061266426"
+  integrity sha512-HdmbVF4V4w1q/iz++RV7bUxIeepTukWewiJGkoCKQMtvPF11MLTa7It9PRc/reysXXZSEyD4Pthchju+IUbMiQ==
+
 express-react-views@^0.11.0:
   version "0.11.0"
   resolved "https://registry.yarnpkg.com/express-react-views/-/express-react-views-0.11.0.tgz#56bfccee57eb8e65fcfb5321c4f377df0f25f174"

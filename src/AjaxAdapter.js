@@ -8,10 +8,20 @@ export default (baseURL) => {
   })
 
   return {
-    read() {
-      return instance.get('/')
+    getUser(userId) {
+      return instance.get(`/${userId}`)
         .then(res => res.data)
         .catch((e) => { throw e; });
     },
+    rosterSwap(team1,team2){
+      return instance.patch('/', {
+        team1id: team1.id,
+        team2id: team2.id,
+        team1slot: team1.slot,
+        team2slot: team2.slot,
+      })
+        .then(res => res.data)
+        .catch((e) => { throw e })
+    }
   };
 };

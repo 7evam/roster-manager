@@ -8,6 +8,7 @@ import Roster from './Roster'
 import AjaxAdapter from './AjaxAdapter';
 
 const Users = AjaxAdapter('/api/users')
+const Teams = AjaxAdapter('/api/teams')
 
 const Container = styled.div`
 display: flex;
@@ -19,7 +20,8 @@ class App extends React.Component {
   constructor(props){
   super(props);
   this.state = {
-    users: [],
+    teams: [],
+    userId: 1,
   }
   this.getData = this.getData.bind(this);
 
@@ -32,18 +34,14 @@ class App extends React.Component {
   async getData() {
    this.setState({
      users: await Users.read(),
+     teams: await Teams.read()
    });
  }
 
   render(){
     return(
     <Container>
-      <div>
-        {this.state.users.map(user => (
-          <span>{user.name}</span>
-        ))}
-      </div>
-      <Roster/>
+      <Roster teams={this.state.teams}/>
     </Container>
   )
   }

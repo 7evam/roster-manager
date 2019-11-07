@@ -7,6 +7,8 @@ import Slot from './Slot'
 import FlashMessage from './FlashMessage'
 import styled from 'styled-components';
 
+import AjaxAdapter from './AjaxAdapter';
+
 const Container = styled.div`
   margin: 8px;
   border-radius: 2px;
@@ -16,20 +18,62 @@ const Container = styled.div`
 class Roster extends React.Component {
   constructor(props){
   super(props);
-  this.state = data
+  this.state = {
+    userId: 1,
+    error: null,
+    selectedTeam: null,
+    mlb: {},
+    nfl: {},
+    nhl: {},
+    nba: {},
+    flex: {},
+    bench: [],
+  }
   this.handleClick = this.handleClick.bind(this)
   this.handleError = this.handleError.bind(this)
+  this.getData = this.getData.bind(this);
+  this.fillSlots = this.fillSlots.bind(this);
   }
 
-  componentDidMount(){
-    let newState = this.state
-    newState.teams.forEach(
+  async componentDidMount(){
+    await this.getData();
+    this.state.teams.forEach(
       team => team.selected = false
     )
-    newState.selectedTeam = null
-    newState.error = null
-    this.setState(newState)
+    await this.fillSlots();
   }
+
+  async getData() {
+  const Teams = AjaxAdapter(`/api/teams/${this.state.userId}`)
+  const Users = AjaxAdapter('/api/users')
+   this.setState({
+     teams: await Teams.read()
+   });
+ }
+
+ fillSlots(){
+   let nfl = this.state.teams.find(team => {return team.slot === 'NFL'})
+   let mlb = this.state.teams.find(team => {return team.slot === 'MLB'})
+   let nhl = this.state.teams.find(team => {return team.slot === 'NHL'})
+   let nba = this.state.teams.find(team => {return team.slot === 'NBA'})
+   let flex = this.state.teams.find(team => {return team.slot === 'FLEX'})
+   let bench = []
+   this.state.teams.forEach(team => {
+     console.log(team)
+     if(team.slot==="null"){
+       bench.push(team)
+     }
+   })
+   this.setState({
+     nfl,
+     mlb,
+     nhl,
+     nba,
+     flex,
+     bench
+   })
+
+ }
 
   handleError(err){
     console.log('in the handleError')
@@ -91,27 +135,15 @@ class Roster extends React.Component {
   }
 
   render(){
-    let nfl = this.state.teams.find(team => {return team.slot === 'NFL'})
-    let mlb = this.state.teams.find(team => {return team.slot === 'MLB'})
-    let nhl = this.state.teams.find(team => {return team.slot === 'NHL'})
-    let nba = this.state.teams.find(team => {return team.slot === 'NBA'})
-    let flex = this.state.teams.find(team => {return team.slot === 'FLEX'})
-    let bench = []
-    this.state.teams.forEach(team => {
-      if(!team.slot){
-        bench.push(team)
-      }
-    })
-
     return(
     <Container>
         <h1>Evan's roster</h1>
-        <Slot slot = 'MLB' team={mlb} handleClick={this.handleClick}/>
-        <Slot slot = 'NFL' team={nfl} handleClick={this.handleClick}/>
-        <Slot slot = 'NHL' team={nhl} handleClick={this.handleClick}/>
-        <Slot slot = 'NBA' team={nba} handleClick={this.handleClick}/>
-        <Slot slot = 'FLEX' team={flex} handleClick={this.handleClick}/>
-        {bench.map((team,index) => (
+        <Slot slot = 'MLB' team={this.state.mlb} handleClick={this.handleClick}/>
+        <Slot slot = 'NFL' team={this.state.nfl} handleClick={this.handleClick}/>
+        <Slot slot = 'NHL' team={this.state.nhl} handleClick={this.handleClick}/>
+        <Slot slot = 'NBA' team={this.state.nba} handleClick={this.handleClick}/>
+        <Slot slot = 'FLEX' team={this.state.flex} handleClick={this.handleClick}/>
+        {this.state.bench.map((team,index) => (
           <Slot slot = 'BENCH' team={team} handleClick={this.handleClick} />
         ))}
         <FlashMessage error={this.state.error}/>

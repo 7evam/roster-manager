@@ -4,7 +4,7 @@ const app            = express();
 const reactViews     = require('express-react-views');
 const path           = require('path');
 const bodyParser     = require('body-parser');
-const userRouter     = require('./routes/userRouter');
+const apiRouter    = require('./routes');
 
 app.use(logger('dev'));
 app.use(bodyParser.json());
@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.set('view engine', 'jsx');
 app.engine('jsx', reactViews.createEngine());
 app.set('views', path.join(__dirname, './src'));
-app.use('/api/users', userRouter);
+app.use('/api', apiRouter);
 app.use(express.static('public'))
 
 

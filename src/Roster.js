@@ -20,7 +20,7 @@ class Roster extends React.Component {
   super(props);
   this.state = {
     ...props,
-    userId: 1,
+    isLoaded: false,
     error: null,
     selectedTeam: null,
     mlb: {},
@@ -36,11 +36,15 @@ class Roster extends React.Component {
   }
 
   async componentDidMount(){
-    const {user} = this.state
-    this.state.user.teams.forEach(
-      team => team.selected = false
-    )
-    await this.fillSlots(user);
+    if(this.state.user){
+      this.state.user.teams.forEach(
+        team => team.selected = false
+      )
+      await this.fillSlots(this.state.user);
+    }
+    this.setState({
+      isLoaded: true
+    })
   }
 
 
@@ -148,19 +152,27 @@ class Roster extends React.Component {
   }
 
   render(){
+    const {isLoaded} = this.state
     return(
-    <Container>
-        <h1>Evan's roster</h1>
-        <Slot slot = 'MLB' team={this.state.mlb} handleClick={this.handleClick}/>
-        <Slot slot = 'NFL' team={this.state.nfl} handleClick={this.handleClick}/>
-        <Slot slot = 'NHL' team={this.state.nhl} handleClick={this.handleClick}/>
-        <Slot slot = 'NBA' team={this.state.nba} handleClick={this.handleClick}/>
-        <Slot slot = 'FLEX' team={this.state.flex} handleClick={this.handleClick}/>
-        {this.state.bench.map((team,index) => (
-          <Slot slot = 'BENCH' key={`bench-${index}`} team={team} handleClick={this.handleClick} />
-        ))}
-        <FlashMessage error={this.state.error}/>
-    </Container>
+      <div>
+      {isLoaded ? (
+          <Container>
+            <h1>Evan's roster</h1>
+            <Slot slot = 'MLB' team={this.state.mlb} handleClick={this.handleClick}/>
+            <Slot slot = 'NFL' team={this.state.nfl} handleClick={this.handleClick}/>
+            <Slot slot = 'NHL' team={this.state.nhl} handleClick={this.handleClick}/>
+            <Slot slot = 'NBA' team={this.state.nba} handleClick={this.handleClick}/>
+            <Slot slot = 'FLEX' team={this.state.flex} handleClick={this.handleClick}/>
+            {this.state.bench.map((team,index) => (
+              <Slot slot = 'BENCH' key={`bench-${index}`} team={team} handleClick={this.handleClick} />
+            ))}
+            <FlashMessage error={this.state.error}/>
+          </Container>
+      ) : (
+        <div>loading...</div>
+      )}
+      </div>
+
   )
   }
 }

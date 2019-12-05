@@ -46,7 +46,9 @@ module.exports = {
     ]
   },
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: {
+      index: '/'
+    },
   },
   plugins: [
     new HtmlWebpackPlugin({

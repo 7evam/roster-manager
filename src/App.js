@@ -4,6 +4,9 @@ import TeamList from './TeamList'
 import LeagueList from './LeagueList'
 import styled from 'styled-components';
 import Roster from './Roster'
+import Home from './Home'
+import NotFound from './NotFound'
+import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
 
 import AjaxAdapter from './AjaxAdapter';
 
@@ -16,18 +19,21 @@ justify-content: center;
 
 class App extends React.Component {
 
-  constructor(props){
-  super(props);
+  constructor(){
+  super();
   this.state = {
-    userId: 1,
+    isLoaded: false,
+    userId: 2,
     user: null,
   }
   this.getUser = this.getUser.bind(this);
-  this.getUser(this.state.userId);
 }
 
   async componentDidMount(){
-    // await this.getUser(this.state.userId);
+    await this.getUser(this.state.userId);
+    this.setState({
+      isLoaded:true
+    })
   }
 
   async getUser(userId, comp) {
@@ -44,11 +50,20 @@ class App extends React.Component {
     }
 
     return(
-    <Container>
-      <Roster getUser={this.getUser} user={this.state.user}/>
-    </Container>
+    <BrowserRouter>
+      <Switch>
+        <Route exact path='/' component={Home}/>
+        <Route exact path='/roster'
+          render={(props)=><Roster {...props} user={this.state.user}/>}
+        />
+
+        <Route component={NotFound}/>
+      </Switch>
+    </BrowserRouter>
   )
   }
 }
+
+//getUser={this.getUser} user={this.state.user}/>
 
 export default App;

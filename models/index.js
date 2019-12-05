@@ -23,21 +23,6 @@ const db = new Sequelize({
 //   },
 // );
 
-const Team = db.define('team', {
-  name: {
-    type: Sequelize.STRING(64),
-    allowNull: false,
-    unique: true,
-  },
-  active: {
-    type: Sequelize.BOOLEAN,
-    allowNull: false
-  },
-  slot: {
-    type: Sequelize.STRING(8),
-  }
-});
-
 const League = db.define('league', {
   name: {
     type: Sequelize.STRING(4),
@@ -53,12 +38,40 @@ const User = db.define('user', {
   },
 });
 
-//associations
-User.hasMany(Team);
-Team.belongsTo(User);
+const Team = db.define('team', {
+  name: {
+    type: Sequelize.STRING(64),
+    allowNull: false,
+    unique: true,
+  },
+  active: {
+    type: Sequelize.BOOLEAN,
+    allowNull: false
+  },
+  slot: {
+    type: Sequelize.STRING(8),
+  },
+  user_id: {
+    type: Sequelize.SMALLINT,
+    references: {
+      model: 'users',
+      key: 'id'
+    }
+  },
+  league_id: {
+    type: Sequelize.SMALLINT,
+    references: {
+      model: 'league',
+      key: 'id'
+    }
+  }
+});
 
+//associations
 League.hasMany(Team);
 Team.belongsTo(League);
+User.hasMany(Team);
+Team.belongsTo(User);
 
 module.exports = {
   Team,

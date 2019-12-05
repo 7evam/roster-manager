@@ -10,8 +10,8 @@ Milwaukee Brewers,false,null,1,1
 Pittsburgh Pirates,false,null,1,1
 St. Louis Cardinals,false,null,1,1
 Arizona Diamondbacks,false,null,1,1
-Colorado Rockies,false,null,1,1
-Los Angeles Dodgers,false,null,1,1
+Colorado Rockies,false,null,2,1
+Los Angeles Dodgers,false,null,2,1
 San Diego Padres,false,null,1,1
 San Francisco Giants,false,null,1,1
 Baltimore Orioles,false,null,1,1
@@ -40,7 +40,7 @@ Cleveland Browns,true,null,1,2
 Dallas Cowboys,true,null,1,2
 Denver Broncos,true,null,1,2
 Detroit Lions,true,null,1,2
-Green Bay Packers,true,null,1,2
+Green Bay Packers,true,null,2,2
 Houston Texans,true,null,1,2
 Indianapolis Colts,true,null,1,2
 Jacksonville Jaguars,true,null,1,2
@@ -54,10 +54,10 @@ New Orleans Saints,true,null,1,2
 New York Giants,true,null,1,2
 New York Jets,true,null,1,2
 Oakland Raiders,true,null,1,2
-Philadelphia Eagles,true,null,1,2
+Philadelphia Eagles,true,null,2,2
 Pittsburgh Steelers,true,null,1,2
 San Francisco 49ers,true,null,1,2
-Seattle Seahawks,true,null,1,2
+Seattle Seahawks,true,null,2,2
 Tampa Bay Buccaneers,true,null,1,2
 Tennessee Titans,true,null,1,2
 Washington Redskins,true,null,1,2
@@ -76,7 +76,7 @@ Edmonton Oilers,true,null,1,3
 Florida Panthers,true,null,1,3
 Los Angeles Kings,true,null,1,3
 Minnesota Wild,true,null,1,3
-Montreal Canadiens,true,null,1,3
+Montreal Canadiens,true,null,2,3
 Nashville Predators,true,null,1,3
 New Jersey Devils,true,null,1,3
 New York Islanders,true,null,1,3
@@ -105,7 +105,7 @@ Golden State Warriors,true,null,1,4
 Houston Rockets,true,null,1,4
 Indiana Pacers,true,null,1,4
 LA Clippers,true,null,1,4
-LA Lakers,true,null,1,4
+LA Lakers,true,null,2,4
 Memphis Grizzlies,true,null,1,4
 Miami Heat,true,null,1,4
 Milwaukee Bucks,true,null,1,4
@@ -114,7 +114,7 @@ New Orleans Hornets,true,null,1,4
 New York Knicks,true,null,1,4
 Oklahoma City Thunder,true,null,1,4
 Orlando Magic,true,null,1,4
-Philadelphia Sixers,true,null,1,4
+Philadelphia Sixers,true,null,2,4
 Phoenix Suns,true,null,1,4
 Portland Trail Blazers,true,null,1,4
 Sacramento Kings,true,null,1,4

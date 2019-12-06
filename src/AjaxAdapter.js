@@ -22,6 +22,16 @@ export default (baseURL) => {
       })
         .then(res => res.data)
         .catch((e) => { throw e })
+    },
+    rosterFill(slot,team){
+      console.log('heres the slot')
+      console.log(slot)
+      return instance.patch('/', {
+        slot,
+        teamId: team.id
+      })
+        .then(res => res.data)
+        .catch((e) => { throw e })
     }
   };
 };

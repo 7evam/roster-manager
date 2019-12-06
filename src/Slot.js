@@ -28,6 +28,7 @@ const EmptyContainer = styled.div`
 `
 
 const shouldRenderButton = (team,slot,selectedTeam) => {
+  // ** re-write this with switch(true) case: case: etc **
   if(selectedTeam === null) return true
   if(typeof selectedTeam === "string"){
     if(!team) return false

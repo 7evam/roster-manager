@@ -52,6 +52,7 @@ class Roster extends React.Component {
 
 
  fillSlots(user){
+   console.log(`filling slots for ${user.name}`)
    let nfl = user.teams.find(team => {return team.slot === 'NFL'})
    let mlb = user.teams.find(team => {return team.slot === 'MLB'})
    let nhl = user.teams.find(team => {return team.slot === 'NHL'})
@@ -63,6 +64,9 @@ class Roster extends React.Component {
        bench.push(team)
      }
    })
+   console.log('mlb')
+   console.log(mlb)
+   console.log('mlb')
    this.setState({
      nfl,
      mlb,
@@ -74,7 +78,48 @@ class Roster extends React.Component {
  }
 
  async rosterSwap(team1,team2){
-   await AjaxAdapter('/api/teams/swap').rosterSwap(team1,team2)
+   if(typeof team1 === "string"){
+     // team 1 is a slot
+    // try{
+      await AjaxAdapter('/api/teams/fill').rosterFill(team1,team2)
+      await this.props.getUser(this.state.user.id)
+      this.setState({
+        user: this.props.user
+      })
+      await this.fillSlots(this.state.user)
+      this.handleError('success')
+    // } catch(err){
+    //   console.error(err)
+    // }
+   } else if(typeof team2 === "string"){
+     // team 2 is a slot
+     // try{
+       await AjaxAdapter('/api/teams/fill').rosterFill(team2,team1)
+       await this.props.getUser(this.state.user.id)
+       this.setState({
+         user: this.props.user
+       })
+       await this.fillSlots(this.state.user)
+       this.handleError('success')
+     // } catch(err){
+     //   console.error(err)
+     // }
+   } else {
+     // both are actual teams
+     // try{
+       await AjaxAdapter('/api/teams/swap').rosterSwap(team1,team2)
+       await this.props.getUser(this.state.user.id)
+       this.setState({
+         user: this.props.user
+       })
+       await this.fillSlots(this.state.user)
+       this.handleError('success')
+     // } catch(err){
+     //   console.error(err)
+     // }
+
+   }
+
  }
 
   handleError(err){
@@ -91,23 +136,8 @@ class Roster extends React.Component {
   }
 
   checkIfValid(team1,team2){
-    // return object with
-    // validSwap: bool
-    // error: bool
-    // message: string
-    let result = {
-      validSwap: false,
-      error: false,
-      message: null
-    }
-    // if same button is clicked
-    if(team1 === team2){
-      this.setState({
-        selectedTeam: null
-      })
-      return result
-    }
-
+    // might need to have some double checks here later
+    return true
   }
 
   async handleClick(clickedTeam){
@@ -121,11 +151,14 @@ class Roster extends React.Component {
       let team1 = clickedTeam
       let team2 = newState.selectedTeam
       let isValid = this.checkIfValid(team1,team2);
-      if(isValid.validSwap===true){
-        this.rosterSwap()
+      if(isValid===true){
+        await this.rosterSwap(team1,team2)
       } else {
-        if(isValid.error) this.handleError(isValid.message)
+        this.handleError(isValid)
       }
+      this.setState({
+        selectedTeam: null
+      })
     }
 
   }

@@ -28,6 +28,7 @@ module.exports = {
   async rosterSwap(req,res,next) {
     try {
       const {team1id, team2id, team1slot, team2slot} = req.body
+      console.log('in the patch')
       Team.update({
         slot: team2slot
       }, {
@@ -42,8 +43,22 @@ module.exports = {
           id: team2id
         }
       })
-      res.sendStatus(204)
+      res.sendStatus(200)
     } catch(e) {
+      next(e)
+    }
+  },
+  async rosterFill(req,res,next) {
+    try{
+      Team.update({
+        slot: req.body.slot
+      }, {
+        where: {
+          id: req.body.teamId
+        }
+      })
+      res.sendStatus(200)
+    } catch(e){
       next(e)
     }
   }

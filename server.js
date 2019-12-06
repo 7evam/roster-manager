@@ -6,6 +6,9 @@ const path           = require('path');
 const bodyParser     = require('body-parser');
 const apiRouter    = require('./routes');
 
+app.use(logger('dev'));
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
 app.set('view engine', 'jsx');
 app.engine('jsx', reactViews.createEngine());
@@ -14,9 +17,8 @@ app.use('/api', apiRouter);
 
 app.use(express.static('public'))
 
-app.use(logger('dev'));
-// app.use(bodyParser.json());
-// app.use(bodyParser.urlencoded({ extended: false }));
+
+
 
 app.get('*', function(req,res){
   res.sendFile(path.join(__dirname, './public/index.html'), function(err){

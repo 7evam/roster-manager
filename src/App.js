@@ -54,7 +54,7 @@ class App extends React.Component {
       <Switch>
         <Route exact path='/' component={Home}/>
         <Route exact path='/roster'
-          render={(props)=><Roster {...props} user={this.state.user}/>}
+          render={(props)=><Roster {...props} getUser={this.getUser}user={this.state.user}/>}
         />
 
         <Route component={NotFound}/>

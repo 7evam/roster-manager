@@ -33,6 +33,8 @@ class Roster extends React.Component {
   this.handleClick = this.handleClick.bind(this)
   this.handleError = this.handleError.bind(this)
   this.fillSlots = this.fillSlots.bind(this);
+  this.checkIfValid = this.checkIfValid.bind(this);
+  this.rosterSwap = this.rosterSwap.bind(this);
   }
 
   async componentDidMount(){
@@ -88,66 +90,43 @@ class Roster extends React.Component {
     }, 3000);
   }
 
-  async handleClick(clickedTeam){
-    let newState = this.state
-    let team1 = clickedTeam
-    let team2 = newState.selectedTeam
-    if(newState.selectedTeam===null){
-      newState.selectedTeam = clickedTeam
-      newState.user.teams.find(team => {return team.id === clickedTeam.id}).selected = true
-    } else {
-      // check if swap is valid
-      const checkIfValid = () => {
-        let team1valid = false
-        let team2valid = false
-        if(
-          team1.league.name === team2.slot ||
-          team2.slot === 'FLEX' ||
-          team2.slot === 'null'
-        ){
-            team1valid = true
-          }
-        if(
-          team2.league.name === team1.slot ||
-          team1.slot === 'FLEX' ||
-          team1.slot === 'null'
-        ){
-            team2valid = true
-          }
-        return team1valid && team2valid
-      }
-      if(checkIfValid()){
-        //newState.teams.find(team => {return team.id === newState.selectedTeam.id}).selected = false
-        // let temp = clickedTeam.slot
-        // clickedTeam.slot = newState.selectedTeam.slot
-        // newState.selectedTeam.slot = temp
-        // let swap1, swap2
-        // newState.teams.forEach((team,index) => {
-        //   if(team.id === clickedTeam.id) swap1 = index
-        //   if(team.id === newState.selectedTeam.id) swap2 = index
-        // })
-        // newState.teams.splice(swap1,1,newState.selectedTeam)
-        // newState.teams.splice(swap2,1,clickedTeam)
-
-        // swap slots on the team object
-        // send to db (send success message if db update 200s)
-        await this.rosterSwap(team1,team2)
-        await this.props.getUser(this.state.userId)
-        await this.setState({
-          user: this.props.user
-        })
-        this.fillSlots(this.state.user)
-      } else {
-        this.handleError('that roster move is not acceptable')
-      }
-      newState.user.teams.find(team => {return team.id === newState.selectedTeam.id}).selected = false
+  checkIfValid(team1,team2){
+    // return object with
+    // validSwap: bool
+    // error: bool
+    // message: string
+    let result = {
+      validSwap: false,
+      error: false,
+      message: null
+    }
+    // if same button is clicked
+    if(team1 === team2){
       this.setState({
         selectedTeam: null
       })
+      return result
     }
-    this.setState({
-      teams: newState.teams,
-    })
+
+  }
+
+  async handleClick(clickedTeam){
+    let newState = this.state
+    if(newState.selectedTeam===null){
+      newState.selectedTeam = clickedTeam
+      this.setState({
+        selectedTeam: newState.selectedTeam
+      })
+    } else {
+      let team1 = clickedTeam
+      let team2 = newState.selectedTeam
+      let isValid = this.checkIfValid(team1,team2);
+      if(isValid.validSwap===true){
+        this.rosterSwap()
+      } else {
+        if(isValid.error) this.handleError(isValid.message)
+      }
+    }
 
   }
 
@@ -158,13 +137,13 @@ class Roster extends React.Component {
       {isLoaded ? (
           <Container>
             <h1>Evan's roster</h1>
-            <Slot slot = 'MLB' team={this.state.mlb} handleClick={this.handleClick}/>
-            <Slot slot = 'NFL' team={this.state.nfl} handleClick={this.handleClick}/>
-            <Slot slot = 'NHL' team={this.state.nhl} handleClick={this.handleClick}/>
-            <Slot slot = 'NBA' team={this.state.nba} handleClick={this.handleClick}/>
-            <Slot slot = 'FLEX' team={this.state.flex} handleClick={this.handleClick}/>
+            <Slot slot = 'MLB' selectedTeam={this.state.selectedTeam}team={this.state.mlb} handleClick={this.handleClick}/>
+            <Slot slot = 'NFL' selectedTeam={this.state.selectedTeam}team={this.state.nfl} handleClick={this.handleClick}/>
+            <Slot slot = 'NHL' selectedTeam={this.state.selectedTeam}team={this.state.nhl} handleClick={this.handleClick}/>
+            <Slot slot = 'NBA' selectedTeam={this.state.selectedTeam}team={this.state.nba} handleClick={this.handleClick}/>
+            <Slot slot = 'FLEX' selectedTeam={this.state.selectedTeam}team={this.state.flex} handleClick={this.handleClick}/>
             {this.state.bench.map((team,index) => (
-              <Slot slot = 'BENCH' key={`bench-${index}`} team={team} handleClick={this.handleClick} />
+              <Slot slot = 'BENCH' key={`bench-${index}`} selectedTeam={this.state.selectedTeam} team={team} handleClick={this.handleClick} />
             ))}
             <FlashMessage error={this.state.error}/>
           </Container>

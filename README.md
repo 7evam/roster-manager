@@ -6,7 +6,7 @@ This project is help manage rosters in the Regiment of Fantasy Leagues.
 
 For this project, you'll need to have postgres, node and a package manager like yarn or NPM installed (the instructions below will assume you have yarn installed)
 
-Once you have those installed and you've cloned this repo, install the packages with
+Once you have those installed and you've cloned and navigated to this repo, install the packages with
 
     yarn install
 Then initiate and seed the database with

@@ -80,33 +80,33 @@ class Roster extends React.Component {
  async rosterSwap(team1,team2){
    if(typeof team1 === "string"){
      // team 1 is a slot
-    // try{
+    try{
       await AjaxAdapter('/api/teams/fill').rosterFill(team1,team2)
       await this.props.getUser(this.state.user.id)
-      this.setState({
+      await this.setState({
         user: this.props.user
       })
       await this.fillSlots(this.state.user)
       this.handleError('success')
-    // } catch(err){
-    //   console.error(err)
-    // }
+    } catch(err){
+      console.error(err)
+    }
    } else if(typeof team2 === "string"){
      // team 2 is a slot
-     // try{
+     try{
        await AjaxAdapter('/api/teams/fill').rosterFill(team2,team1)
        await this.props.getUser(this.state.user.id)
-       this.setState({
+       await this.setState({
          user: this.props.user
        })
        await this.fillSlots(this.state.user)
        this.handleError('success')
-     // } catch(err){
-     //   console.error(err)
-     // }
+     } catch(err){
+       console.error(err)
+     }
    } else {
      // both are actual teams
-     // try{
+     try{
        await AjaxAdapter('/api/teams/swap').rosterSwap(team1,team2)
        await this.props.getUser(this.state.user.id)
        this.setState({
@@ -114,9 +114,9 @@ class Roster extends React.Component {
        })
        await this.fillSlots(this.state.user)
        this.handleError('success')
-     // } catch(err){
-     //   console.error(err)
-     // }
+     } catch(err){
+       console.error(err)
+     }
 
    }
 

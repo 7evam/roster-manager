@@ -13,6 +13,14 @@ export default (baseURL) => {
         .then(res => res.data)
         .catch((e) => { throw e; });
     },
+    authenticateUser(email,password) {
+      return instance.post(`/`, {
+        email,
+        password
+      })
+        .then(res => res.data)
+        .catch((e) => { throw e; });
+    },
     rosterSwap(team1,team2){
       return instance.patch('/', {
         team1id: team1.id,

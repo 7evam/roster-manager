@@ -14,7 +14,6 @@ const { Team, User, League, db } = require('../models');
 
        parse((await readFile('./data/users.csv')), {columns: true, trim:true})
        .then(users => users.map(user => User.create(user))),
-       // User.bulkCreate(users, {fields:['password']})),
 
        parse((await readFile('./data/leagues.csv')), {columns: true, trim:true})
        .then(leagues => League.bulkCreate(leagues))

@@ -1,6 +1,16 @@
 const { User, Team, League } = require('../models')
 
 module.exports = {
+  async authenticateUser(req,res,next) {
+    try{
+      console.log('route works')
+      console.log(req.body.email)
+      console.log(req.body.password)
+      res.send('nice something is working')
+    } catch(e){
+      next(e)
+    }
+  },
   async findAllUsers(req,res,next) {
     try {
       const users = await User.findAll();

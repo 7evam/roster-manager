@@ -5,6 +5,7 @@ import LeagueList from './LeagueList'
 import styled from 'styled-components';
 import Roster from './Roster'
 import Home from './Home'
+import LogIn from './LogIn'
 import NotFound from './NotFound'
 import { BrowserRouter, Route, Link, Switch } from 'react-router-dom'
 
@@ -56,6 +57,7 @@ class App extends React.Component {
         <Route exact path='/roster'
           render={(props)=><Roster {...props} getUser={this.getUser}user={this.state.user}/>}
         />
+        <Route exact path='/login' component={LogIn}/>
 
         <Route component={NotFound}/>
       </Switch>

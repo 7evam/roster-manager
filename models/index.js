@@ -48,34 +48,6 @@ const User = db.define('user', {
     type: Sequelize.STRING(64),
     allowNull: false,
   }
-},
-{
-  classMethods: {
-    validPassword: function(password,passwd,done,user){
-      bcrpyt.compare(password,passwd, function(err, isMatch){
-        if(err) console.log(err)
-        if(isMatch) {
-          return done(null, user)
-        } else {
-          return done(null, false)
-        }
-      })
-    }
-  }
-// },
-// {
-//   hooks: {
-//     beforeCreate: function(user,fn){
-//       let salt = bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt){
-//         return salt
-//       });
-//       bcrypt.hash(user.password, salt, null, function(err, hash){
-//         if(err) return next(err);
-//         user.password = hash;
-//         return fn(null, user)
-//       })
-//     }
-//   }
 });
 
 const Team = db.define('team', {
@@ -107,28 +79,21 @@ const Team = db.define('team', {
   }
 });
 
-// hooks
-// {password} might be options
-User.beforeCreate((user) => {
-    // let salt = bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt){
-    //   return salt
-    // });
-        return bcrypt.hash(user.password, SALT_WORK_FACTOR).then(hash => {
-          user.password = hash
-        })
-
+// Methods
+User.checkIfValid = ((password,dbPassword) => {
+    return promise = new Promise((resolve,reject) => {
+      bcrypt.compare(password, dbPassword)
+      .then(isValid => resolve(isValid))
+      .catch(err => console.error(err))
+    })
 })
-// User.beforeBulkCreate(function(user,fn){
-//   let salt = bcrypt.genSalt(SALT_WORK_FACTOR, function(err, salt){
-//     return salt
-//   });
-//   bcrypt.hash(user.password, salt, null, function(err, hash){
-//     if(err) return next(err);
-//     user.password = hash;
-//     return fn(null, user)
-//   })
-// })
 
+// Hooks
+User.beforeCreate((user) => {
+  return bcrypt.hash(user.password, SALT_WORK_FACTOR)
+  .then(hash => user.password = hash)
+  .catch(err => console.error(err))
+})
 
 //associations
 League.hasMany(Team);

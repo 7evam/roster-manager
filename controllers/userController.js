@@ -3,9 +3,17 @@ const { User, Team, League } = require('../models')
 module.exports = {
   async authenticateUser(req,res,next) {
     try{
-      console.log('route works')
-      console.log(req.body.email)
-      console.log(req.body.password)
+      const user = await User.findOne({
+        where: {
+          email: req.body.email
+        },
+      });
+      let isValid = await User.checkIfValid(req.body.password,user.password)
+      if(isValid){
+        console.log('password is correct')
+      } else {
+        console.log('password is the worst')
+      }
       res.send('nice something is working')
     } catch(e){
       next(e)

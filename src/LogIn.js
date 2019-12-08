@@ -34,7 +34,7 @@ return (
       <br />
       <div>
         <input
-          type="email"
+          // type="email"
           name="email"
           value={userEmail}
           placeholder="john@mail.com"
